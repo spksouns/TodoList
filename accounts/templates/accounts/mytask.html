@@ -1,0 +1,44 @@
+{%extends 'accounts/main.html'%}
+{%block content%}
+<div class="header-bar">
+    <div>
+        <!--<a style="color:white;text-decoration:none"href="{%url 'task-list' %}">&#8592; Back</a>-->
+        <a href="{%url 'members'%}">&#8592; Back</a>
+        <h4>{{searchdate}}</h4>
+        {%for n in name%}
+        <h1>{{n|title}}'s TaskList</h1>
+        <h3>{{n|title}} has <i>{{count}} incomplete task{{count|pluralize:'s'}}</i></h3> 
+        {%endfor%}
+    </div>
+    <a href="{%url 'adminpage'%}">Home</a>
+</div>
+<div id="search-add-wrapper">
+    <form action="" method="get">
+      {%csrf_token%}
+      <input type="date" id="mydate"name="searchdate" />
+      <input type="submit" value="Select Date"class="button">
+    </form>
+</div>
+<div class="card-body">
+    <div class="task-items-wrapper">
+      {%for display1 in display%}
+      <div class="task-wrapper">
+        {%if display1.complete%}
+          <div class="task-title">
+              <div class="task-complete-icon"></div>
+              <i><s><a>{{display1}}</a></s></i>
+          </div>
+        {% else %}
+            <div class="task-title">
+                <div class="task-incomplete-icon"></div>
+                <a>{{ display1 }}</a>
+            </div>
+        {% endif %}       
+      </div>
+      {% empty %} 
+        <h3>No items in list</h3>
+      {% endfor %}
+    </div>
+</div>
+{%endblock content%}
+  

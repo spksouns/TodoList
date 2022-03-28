@@ -1,0 +1,19 @@
+{%extends 'accounts/main.html'%} 
+{%block content%}
+<div class="header-bar">
+  <div>
+    <h1>Hello {{request.user|title}}</h1>
+  </div>
+{% if request.user.is_authenticated%}
+<a href="{% url 'logout'%}">Logout</a>
+</div>
+{%else%}
+<a href="{% url 'login'%}">Login</a>
+{%endif%}
+<div class="card-body">
+    <div class="task-items-wrapper">
+    <a style="text-decoration:none"class="button"href="{%url 'task-list' %}">View Your Task</a>
+    <a style="text-decoration:none"class="button"href="{%url 'members'%}">View Members</a>
+    </div>
+</div>
+{%endblock content%}

@@ -1,7 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
-#Database data model
+# Database data model
+# class User(AbstractUser):
+#is_Admin = models.BooleanField(default=False)
+#is_Member = models.BooleanField(default=False)
+
+
 class Task1(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)

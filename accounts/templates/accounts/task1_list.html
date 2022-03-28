@@ -1,15 +1,18 @@
 {%extends 'accounts/main.html'%} 
-{%block content%} 
+{%block content%}
 <div class="header-bar">
   <div>
+    {%if request.user.is_superuser%}
+      <a href="{%url 'adminpage' %}">&#8592; Back</a>
+    {%else%}
+    {%endif%}
     <h4>{{searchdate}}</h4>
     <h1>Hello {{request.user|title}}</h1>
     <h3>You have <i>{{count}} incomplete task{{count|pluralize:'s'}}</i></h3> 
   </div>
   {% if request.user.is_authenticated%}
-<a href="{% url 'logout'%}">Logout</a>
+  <a href="{% url 'logout'%}">Logout</a>
 </div>
-
 {%else%}
 <a href="{% url 'login'%}">Login</a>
 {%endif%}
@@ -31,16 +34,18 @@
       {%if task.complete%}
         <div class="task-title">
             <div class="task-complete-icon"></div>
-            <i><s><a href="{% url 'task-update' task.id%}">{{ task }}</a></s></i>
+            <i><s><a href="{% url 'task-update' task.id%}">{{task}}</a></s></i>
         </div>
+        <!--<a href="{%url 'cross' task.id}">ClickMe</a>-->
         <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
       {% else %}
           <div class="task-title">
               <div class="task-incomplete-icon"></div>
               <a href="{% url 'task-update' task.id%}">{{ task }}</a>
           </div>
+          <!--<a href="#">ClickMe</a>-->
           <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
-      {% endif %}
+      {% endif %}       
     </div>
     {% empty %} 
       <h3>No items in list</h3>

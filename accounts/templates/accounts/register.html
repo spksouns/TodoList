@@ -4,7 +4,7 @@
 <h1>Register Here</h1>
 </div>
 <div class = "card-body">
-  <form action="" method="post">
+  <form action="" method="POST">
     {%csrf_token%} 
     <label>{{form.username.label}}</label>
     {{form.username}}
@@ -12,6 +12,8 @@
     {{form.password1}}
     <label>{{form.password2.label}}</label>
     {{form.password2}}
+    <label>Are you Admin..?</label>
+    {{form.is_superuser}}
     <br><br>
     <input class="button"type="submit" value="Register" />
     <small><p>Have an account already?<a href="{% url 'login'%}">Login now</a></p></small>
